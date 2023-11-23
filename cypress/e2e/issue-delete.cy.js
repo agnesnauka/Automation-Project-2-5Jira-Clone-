@@ -28,10 +28,12 @@ describe('Issue deletion', () => {
           cy.get('[data-testid="icon:trash"]').click();
           });
   
-          cy.contains('button', 'Cancel')
+        cy.contains('button', 'Cancel')
                   .click()
                   .should('not.exist');
-          cy.contains('Issue has successfully been deleted').should('not.exist')
-          cy.contains('This is an issue of type: Task.').should('exist');
-      });
+        cy.contains('Issue has successfully been deleted').should('not.exist')
+                
+        cy.get('[data-testid="icon:close"]').first().click();
+        cy.contains('This is an issue of type: Task.').should('exist');
+    });
 });
