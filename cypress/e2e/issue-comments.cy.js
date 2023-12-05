@@ -70,9 +70,10 @@ describe('Issue comments creating, editing and deleting', () => {
     });
 
     //this is the new part
-    it('Should create, edit and delete a comment successfully', () => {
+    it.only('Should create, edit and delete a comment successfully', () => {
         const comment = 'Hello';
         const editComment = 'Hello there!';
+        const getIssueCommentsModal = () => cy.get('[data-testid="issue-comment"]');
 
         getIssueDetailsModal().within(() => {
             cy.contains('Add a comment...')
@@ -85,9 +86,9 @@ describe('Issue comments creating, editing and deleting', () => {
                 .should('not.exist');
 
             cy.contains('Add a comment...').should('exist');
-            cy.get('[data-testid="issue-comment"]').should('contain', comment);
+            getIssueCommentsModal().should('contain', comment);
 
-            cy.get('[data-testid="issue-comment"]')
+            getIssueCommentsModal()
                 .first()
                 .contains('Edit')
                 .click()
@@ -102,11 +103,11 @@ describe('Issue comments creating, editing and deleting', () => {
                 .click()
                 .should('not.exist');
 
-            cy.get('[data-testid="issue-comment"]')
+            getIssueCommentsModal()
                 .should('contain', 'Edit')
                 .and('contain', editComment);
 
-            cy.get('[data-testid="issue-comment"]')
+            getIssueCommentsModal()
                 .first()
                 .contains('Delete')
                 .click();
@@ -117,8 +118,7 @@ describe('Issue comments creating, editing and deleting', () => {
             .click()
             .should('not.exist');
     
-        getIssueDetailsModal()
-            .find('[data-testid="issue-comment"]')
+        getIssueCommentsModal()
             .contains(editComment)
             .should('not.exist');
 
