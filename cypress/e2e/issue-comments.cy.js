@@ -70,7 +70,7 @@ describe('Issue comments creating, editing and deleting', () => {
     });
 
     //this is the new part
-    it.only('Should create, edit and delete a comment successfully', () => {
+    it('Should create, edit and delete a comment successfully', () => {
         const comment = 'Hello';
         const editComment = 'Hello there!';
         const getIssueCommentsModal = () => cy.get('[data-testid="issue-comment"]');
